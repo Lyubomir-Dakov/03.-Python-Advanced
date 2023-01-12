@@ -1,19 +1,50 @@
-from project.hotel import Hotel
-from project.room import Room
+from project.library import Library
+from project.user import User
+from project.registration import Registration
 
-hotel = Hotel.from_stars(5)
+user = User(12, 'Peter')
+library = Library()
+registration = Registration()
+registration.add_user(user, library)
+print(registration.add_user(user, library))
+registration.remove_user(user, library)
+print(registration.remove_user(user, library))
+registration.add_user(user, library)
+print(registration.change_username(2, 'Igor', library))
+print(registration.change_username(12, 'Peter', library))
+print(registration.change_username(12, 'George', library))
 
-first_room = Room(1, 3)
-second_room = Room(2, 2)
-third_room = Room(3, 1)
+[print(f'{user_record.id}, {user_record.username}, {user_record.books}') for user_record in library.user_records]
 
-hotel.add_room(first_room)
-hotel.add_room(second_room)
-hotel.add_room(third_room)
+library.books_available.update({'J.K.Rowling': ['The Chamber of Secrets',
+                                                'The Prisoner of Azkaban',
+                                                'The Goblet of Fire',
+                                                'The Order of the Phoenix',
+                                                'The Half-Blood Prince',
+                                                'The Deathly Hallows']})
+library.get_book('J.K.Rowling', 'The Deathly Hallows', 17, user)
+print(library.books_available)
+print(library.rented_books)
+print(user.books)
+print(library.get_book('J.K.Rowling', 'The Deathly Hallows', 10, user))
+print(library.return_book('J.K.Rowling', 'The Cursed Child', user))
+library.return_book('J.K.Rowling', 'The Deathly Hallows', user)
+print(library.books_available)
+print(library.rented_books)
+print(user.books)
 
-hotel.take_room(1, 4)
-hotel.take_room(1, 2)
-hotel.take_room(3, 1)
-hotel.take_room(3, 1)
 
-print(hotel.status())
+# user = User(12, 'Peter')
+# library = project()
+# registration = Registration()
+# registration.add_user(user, library)
+# library.books_available.update({'J.K.Rowling': ['The Chamber of Secrets',
+#                                                 'The Prisoner of Azkaban',
+#                                                 'The Goblet of Fire',
+#                                                 'The Order of the Phoenix',
+#                                                 'The Half-Blood Prince',
+#                                                 'The Deathly Hallows']})
+# library.get_book('J.K.Rowling', 'The Deathly Hallows', 10, user)
+# print(user)
+
+
